@@ -1,6 +1,6 @@
-# VivoKey Wordpress Plugin!
+# VivoKey OpenID Connect plugin for WordPress Plugin!
 
-This plugin will enable you to link your **VivoKey cryptobionic implant** with your WordPress account and allow you to scan your VivoKey to log in, rather than enter your username and password.
+This plugin will enable you to link your **VivoKey Profile** with your WordPress account and allow you to scan your **VivoKey cryptobionic implant** to log in, rather than enter your username and password.
 
 
 # Contribute
