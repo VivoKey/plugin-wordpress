@@ -8,7 +8,7 @@
                 <img style="float: left;
                 vertical-align: middle;
                 margin-left: 10px;
-                " src="./wp-content/plugins/VivoKey-Login/vivokey.png" width="32" height="32"/>
+                " src="<?php echo plugin_dir_url( __FILE__ )?>../vivokey.png" width="32" height="32"/>
                 <span style="line-height: 32px; text-align: center; font-size: +1.2em;">Log in with VivoKey</span>
                 </div>
 </button>

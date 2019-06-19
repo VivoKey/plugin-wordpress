@@ -4,7 +4,7 @@ Plugin Name: VivoKey OpenID Connect
 Plugin URI:
 Description: This plugin allows users to authenticate using the VivoKey OpenID Connect API
 Version: 1.1
-Author: Ashley Buckingham
+Author: VivoKey
 Author URI:
 Author Email: amal@vivokey.com
 License:
@@ -104,8 +104,9 @@ if (!class_exists('VivoKeyLoginPlugin')):
                 $id_token = get_user_meta($user->ID, 'id_token', true);
                 $VivoKey_only_sign_on = $this->get_option('VivoKey_Login_Only');
 
-                if ($VivoKey_only_sign_on == 1 && $id_token != null) {
-                    return new WP_Error('invalid_email', __('<strong>ERROR</strong>: Invalid email address.') . ' <a href="' . wp_lostpassword_url() . '">' . __('Lost your password?') . '</a>');
+                
+                if (/*$VivoKey_only_sign_on == 1 &&*/ $id_token != null) { // Defaulting so that if they are linked they must use vivokey
+                    return new WP_Error('VivoKey', __('<strong>ERROR</strong>: You must log in using your VivoKey.'));
                 }
                 return $user;
             }, 30, 3);
@@ -210,10 +211,13 @@ if (!class_exists('VivoKeyLoginPlugin')):
             // If you're removing your own account or you are an admin then you can perform this action
             if ($givenUserID == $real_user_id || $isadmin == true) {
                 // remove the value from db
-                update_user_meta($real_user_id, 'id_token', '');
+                update_user_meta($givenUserID, 'id_token', '');
 
                 // redirect to user page
-                wp_die("Account disconnected.");
+				$url = "/wp-admin/user-edit.php?user_id=" . $givenUserID;
+                // redirect to user page
+  			    header( "refresh:5;url=" . $url ); 
+				wp_die("Your VivoKey Profile is disconnected! \n Redirecting in 5 secs.");
             } else {
                 wp_die("You do not have permission to disconnect this account");
             }
@@ -302,7 +306,9 @@ if (!class_exists('VivoKeyLoginPlugin')):
 
                 // Update User Meta table with new token
                 update_user_meta($user_id, 'id_token', $id_token);
-                wp_die("Your VivoKey Profile is linked!");
+
+                header( "refresh:5;url=/wp-admin/profile.php" ); 
+				wp_die("Your VivoKey Profile is Linked! \n Redirecting in 5 secs.");
             }
 
             if ($action == 'auth') {
@@ -379,7 +385,7 @@ if (!class_exists('VivoKeyLoginPlugin')):
             $this->add_settings_field('VivoKey_Client_ID', 'VivoKey-connect', 'VivoKey-connect-clientc');
             // Add a Client Secret setting
             $this->add_settings_field('VivoKey_Client_Secret', 'VivoKey-connect', 'VivoKey-connect-clientc');
-
+/* TODO: fix checkbox saving
             add_settings_section('VivoKey-connect-clientd', 'Optional Settings', function () {
                 echo "You can configure additional settings that affect how your WordPress site will treat VivoKey authentications. </br></br>";
                 
@@ -395,7 +401,7 @@ if (!class_exists('VivoKeyLoginPlugin')):
 
             //Add checkbox shit
             $this->add_settings_field('VivoKey_Login_Only', 'Checkbox Element', 'VivoKey-connect-clientd');
-            
+*/
             add_settings_section('VivoKey-connect-cliente', 'How to connect your VivoKey Profile to WordPress', function () {
                 echo "Any WordPress users who want to connect their VivoKey Profile to their WordPress account must first log in using their username and password, then navigate to the <a href=\"" . get_site_url() ."/wp-admin/profile.php\">Profile page</a>. Toward the bottom of the Profile page there will be a VivoKey Profile section with a button that says \"Connect VivoKey\". When the button is clicked, they will be prompted to authenticate with their VivoKey and grant authorization to WordPress to access their OpenID Connect profile information. Once connected, the VivoKey member may then use the \"Log in with VivoKey\" button on the WordPress Login screen. </div>";
             }, 'VivoKey-connect');
