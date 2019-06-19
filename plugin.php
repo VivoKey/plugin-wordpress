@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: VivoKey OpenID Connect
+Plugin Name: VivoKey OpenID Connect plugin for WordPress
 Plugin URI:
 Description: This plugin allows users to authenticate using the VivoKey OpenID Connect API
 Version: 1.1
@@ -9,11 +9,17 @@ Author URI:
 Author Email: amal@vivokey.com
 License:
 
-* Licensed under the Apache License, Version 2.0 (the "License"); you may
-* not use this file except in compliance with the License. You may obtain
-* a copy of the License at
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
 *
-*      http://www.apache.org/licenses/LICENSE-2.0
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+*      https://www.gnu.org/licenses/gpl-3.0.html
 *
 * Unless required by applicable law or agreed to in writing, software
 * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
