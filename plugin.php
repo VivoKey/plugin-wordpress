@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: VivoKey OpenID Connect plugin for WordPress
+Plugin Name: VivoKey OpenID Connect
 Plugin URI:
 Description: This plugin allows users to authenticate using the VivoKey OpenID Connect API
 Version: 1.1
